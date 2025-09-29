@@ -29,7 +29,7 @@ Gpio getCommsLedPin() {
   return Gpio::D15;
 #else
   // f407-discovery community board not frankenso
-	return config->communityCommsLedPin;
+	return Gpio::A1;  //config->communityCommsLedPin;
 #endif
 }
 
