@@ -234,7 +234,7 @@ uint8_t findBaudIndex(SerialTsChannelBase* tsChannel) {
 	// find current baudrate
 	for(uint8_t baudIdx=0; baudIdx < efi::size(baudRates); baudIdx++) {
 		tsChannel->stop();
-		chThdSleepMilliseconds(10);	// safety
+		chThdSleepMilliseconds(5);	// safety
 
 		if (baudIdx == efi::size(baudRates)) {
 			efiPrintf("Failed to find current BT module baudrate");
@@ -244,7 +244,7 @@ uint8_t findBaudIndex(SerialTsChannelBase* tsChannel) {
 
 		efiPrintf("Restarting at %lu", baudRates[baudIdx].rate);
 		tsChannel->start(baudRates[baudIdx].rate);
-		chThdSleepMilliseconds(10);	// safety
+		chThdSleepMilliseconds(5);	// safety
 
 		/* Ping BT module */
 		btWrite(tsChannel, "AT\r\n");
