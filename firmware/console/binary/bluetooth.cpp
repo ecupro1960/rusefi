@@ -174,7 +174,7 @@ static void runCommands(SerialTsChannelBase* tsChannel) {
 
 	/* restart with a working baud, then change settings */
 	tsChannel->stop();
-	chThdSleepMilliseconds(10);	// safety
+	chThdSleepMilliseconds(5);	// safety
 
 	tsChannel->start(baudRates[workingBaudIndex].rate);
 
@@ -255,7 +255,7 @@ uint8_t findBaudIndex(SerialTsChannelBase* tsChannel) {
 			btWrite(tsChannel, "AT+DISC\r\n");
 			if (btWaitOk(tsChannel) == 0) {
 				efiPrintf("JDY33 disconnected");
-				chThdSleepMilliseconds(10);	// safety
+				chThdSleepMilliseconds(5);	// safety
 				return baudIdx;
 			}
 		} else if (btModuleType == BLUETOOTH_JDY_31) {
@@ -263,7 +263,7 @@ uint8_t findBaudIndex(SerialTsChannelBase* tsChannel) {
 			btWrite(tsChannel, "AT+BAUD\r\n");
 			if (btBaudOk(tsChannel) == 0) {
 				efiPrintf("JDY31 disconnected");
-				chThdSleepMilliseconds(10);	// safety
+				chThdSleepMilliseconds(5);	// safety
 				return baudIdx;
 			}
 		}
