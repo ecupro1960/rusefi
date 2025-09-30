@@ -61,7 +61,7 @@
 #endif /* ETB_MAX_COUNT */
 
 #ifndef ETB_INTERMITTENT_LIMIT
-#define ETB_INTERMITTENT_LIMIT 32768  //50
+#define ETB_INTERMITTENT_LIMIT 50
 #endif
 
 static pedal2tps_t pedal2tpsMap{"p2t"};
