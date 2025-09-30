@@ -174,7 +174,7 @@ static void runCommands(SerialTsChannelBase* tsChannel) {
 
 	/* restart with a working baud, then change settings */
 	tsChannel->stop();
-	chThdSleepMilliseconds(5);	// safety
+	chThdSleepMilliseconds(10);	// safety
 
 	tsChannel->start(baudRates[workingBaudIndex].rate);
 
@@ -234,7 +234,7 @@ uint8_t findBaudIndex(SerialTsChannelBase* tsChannel) {
 	// find current baudrate
 	for(uint8_t baudIdx=0; baudIdx < efi::size(baudRates); baudIdx++) {
 		tsChannel->stop();
-		chThdSleepMilliseconds(5);	// safety
+		chThdSleepMilliseconds(10);	// safety
 
 		if (baudIdx == efi::size(baudRates)) {
 			efiPrintf("Failed to find current BT module baudrate");
@@ -244,7 +244,7 @@ uint8_t findBaudIndex(SerialTsChannelBase* tsChannel) {
 
 		efiPrintf("Restarting at %lu", baudRates[baudIdx].rate);
 		tsChannel->start(baudRates[baudIdx].rate);
-		chThdSleepMilliseconds(5);	// safety
+		chThdSleepMilliseconds(10);	// safety
 
 		/* Ping BT module */
 		btWrite(tsChannel, "AT\r\n");
@@ -255,7 +255,7 @@ uint8_t findBaudIndex(SerialTsChannelBase* tsChannel) {
 			btWrite(tsChannel, "AT+DISC\r\n");
 			if (btWaitOk(tsChannel) == 0) {
 				efiPrintf("JDY33 disconnected");
-				chThdSleepMilliseconds(5);	// safety
+				chThdSleepMilliseconds(10);	// safety
 				return baudIdx;
 			}
 		} else if (btModuleType == BLUETOOTH_JDY_31) {
@@ -263,7 +263,7 @@ uint8_t findBaudIndex(SerialTsChannelBase* tsChannel) {
 			btWrite(tsChannel, "AT+BAUD\r\n");
 			if (btBaudOk(tsChannel) == 0) {
 				efiPrintf("JDY31 disconnected");
-				chThdSleepMilliseconds(5);	// safety
+				chThdSleepMilliseconds(10);	// safety
 				return baudIdx;
 			}
 		}
